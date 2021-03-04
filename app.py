@@ -42,3 +42,6 @@ def add(primeiro_nome: str, segundo_nome: str) -> str:
         logger.error(
             f'{primeiro_nome} type: {type(primeiro_nome)} - {segundo_nome} type: {type(segundo_nome)}'
         )
+
+add('Luiza', 'Kinsky')
+add('Luiza', True)

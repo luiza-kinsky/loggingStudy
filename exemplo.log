@@ -1,0 +1,2 @@
+2021-03-04 10:11:49,644:INFO:app.py:Luiza Kinsky
+2021-03-04 10:11:49,644:ERROR:app.py:Luiza type: <class 'str'> - True type: <class 'bool'>
