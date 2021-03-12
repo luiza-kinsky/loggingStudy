@@ -40,15 +40,14 @@ logging.basicConfig(filename='soma.log',
 # Instancia do objeto getLogger()
 logger = logging.getLogger('root')
 
-def add(x: str, y: str) -> str:
+def add(x, y):
     """
         Essa função recebe o primeiro nome e o segundo nome de uma pessoa e retorna o nome completo dela
     """
-
-    # Aqui, é verificado se os parametros passados são do tipo string (str)
     if isinstance(x, int) and isinstance(y, int):
-        logger.info(f'{x} {y}')
-
+        soma = x+y
+        logger.info(soma)
+        #self.logger.info(x,y)
         return x + y
     else:
         logger.error(
