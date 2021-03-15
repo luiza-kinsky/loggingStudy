@@ -1,14 +1,20 @@
 import logging
+import logging.config
 from pythonjsonlogger import jsonlogger
 
 # Função que determina o json
 def setup_logging(log_level, log_format):
-    logger = logging.getLogger()
+    logger = logging.getLogger(__name__)
     logger.setLevel(log_level)
-    logHandler = logging.StreamHandler()
+    json_handler = logging.StreamHandler()
+    file_handler = logging.FileHandler("test.log")
     formatter = jsonlogger.JsonFormatter(log_format)
-    logHandler.setFormatter(formatter)
-    logger.addHandler(logHandler)
+    json_handler.setFormatter(formatter)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(json_handler)
+    logger.addHandler(file_handler)
+
+    return logger
 
 '''
    A formatação abaixo permite personalizar
@@ -17,7 +23,7 @@ def setup_logging(log_level, log_format):
 # DateTime:Level:Arquivo:Mensagem
 log_format = '%(asctime)s:%(levelname)s:%(filename)s:%(message)s'
 log_level = logging.DEBUG
-setup_logging(log_level, log_format)
+logger = setup_logging(log_level, log_format)
 '''
    Aqui as configurações do modulo são definidas
 
@@ -26,19 +32,19 @@ setup_logging(log_level, log_format)
    level = 'level em que o log atuará'
    format = 'formatação da mensagem do log'
 '''
-logging.basicConfig(filename='soma.log',
-                    # w -> sobrescreve o arquivo a cada log
-                    # a -> não sobrescreve o arquivo
-                    filemode='w',
-                    level=logging.DEBUG,
-                    format=log_format)
+# logging.basicConfig(filename='soma.log',
+#                     # w -> sobrescreve o arquivo a cada log
+#                     # a -> não sobrescreve o arquivo
+#                     filemode='w',
+#                     level=logging.DEBUG,
+#                     format=log_format)
 
 '''
    O objeto getLogger() permite o retorno de
    varias instancias de logs.
 '''
 # Instancia do objeto getLogger()
-logger = logging.getLogger('root')
+#logger = logging.getLogger('root')
 
 def add(x, y):
     """
@@ -46,9 +52,9 @@ def add(x, y):
     """
     if isinstance(x, int) and isinstance(y, int):
         soma = x+y
+        #logger.info(soma)
         logger.info(soma)
-        #self.logger.info(x,y)
-        return x + y
+        return soma
     else:
         logger.error(
             f'{x} type: {type(x)} - {y} type: {type(y)}'
